@@ -1,0 +1,4 @@
+.titulo_secao::before {
+  /* O item abaixo é injetado via CSS para fins puramente decorativos */
+  content: "📰 ";
+}
