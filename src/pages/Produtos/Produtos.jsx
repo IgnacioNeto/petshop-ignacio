@@ -6,7 +6,7 @@ const Produtos = () => {
     <section>
       <h2 className={estilos.titulo_secao}>Pet contato</h2>
 
-      <Caixa id="produtos" className={estilos.produtos}>
+      <Caixa id="produtos" listaDeClasses={estilos.produtos}>
         <article>
           <h3>produto 1</h3>
           <p>
