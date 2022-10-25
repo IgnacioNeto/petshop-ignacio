@@ -3,12 +3,11 @@ import servidorApi from "../../api/servidor-api";
 import estilos from "./ListaPosts.module.css";
 import Artigo from "./Artigo";
 import serverApi from "../../api/servidor-api";
+import LoadingDesenho from "../LoadingDesenho/LoadingDesenho";
 
 const ListaPosts = () => {
-  /* Iniciamos o state do componente com um array VAZIO,
-  para posteriormente "preenchê-lo" com dados vindos da API
-  Esta atribuição será feita com auxílio do setPosts */
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getPosts() {
@@ -16,6 +15,7 @@ const ListaPosts = () => {
         const resposta = await fetch(`${serverApi}/posts`);
         const dados = await resposta.json();
         setPosts(dados);
+        setLoading(false);
       } catch (error) {
         console.log("Deu ruim!" + error.message);
       }
@@ -23,22 +23,11 @@ const ListaPosts = () => {
     getPosts();
   }, []);
 
-  /* Sobre o useEffect
-  Este hook visa permitir um maior controle sobre "efeitos
-  colaterais" na execusão do componente
-  
-  Recebe 2 parâmetros:
-  1º função callback com o que será executado
-  2º lista de dependências que indicarão ao useEffect quando ele deverá funcionar
-
-  - Se não passar a lista (ou seja, se deixar sem []), useEffect executará toda vez
-  que o componente for renderizado. Portanto, o callback se torna um loop infinito.
-
-  - Se passar a lista vazia (ou seja, se deixar o []), useEffect executará somente
-  no momento que o componente é renderizado pela primeira vez, evitando o loop
-  infinito no callback.
-  
-  */
+  // abaixo mesmo que true
+  if (loading) {
+    // return <mark style={{ backgroundColor: "Red" }}>Carregando...</mark>;
+    return <LoadingDesenho />;
+  }
 
   return (
     <div className={estilos.lista_posts}>
