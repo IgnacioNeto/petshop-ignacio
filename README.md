@@ -105,3 +105,43 @@ Exemplos:
 `http://localhost:2112/posts`
 
 `http://localhost:2112/contatos`
+
+--
+
+## React Hooks
+
+Introduzidos na versão React 16.8, são funções que permitem manipular estados e outros recursos do React sem a necessidade de programar Classes. **Hooks** são funções que se conectam aos estados do React e aos recursos do ciclo de vida dos componentes da função. _Não funcionam dentro de classes_.
+
+Mais informações: <https://www.javatpoint.com/react-hooks>
+
+### useState
+
+Função que retorna uma variável com o valor do estado (state) e uma função que permite atualizar o valor desta variável. Podemos ter vários useState em nossos componentes para gerenciar estados e dados diferentes.
+
+### useEffect
+
+Este hook visa permitir um maior controle sobre "efeitos colaterais" na execução do componente.
+
+Recebe dois parâmetros:
+
+- 1º: função callback com o que será executado
+- 2º: lista (array) de dependências que indicarão ao `useEffect` quando ele deverá funcionar
+
+Se não passar a lista (ou seja, se deixar sem []), `useEffect` executará toda vez que o componente for renderizado. Portanto, o callback se torna um loop infinito.
+
+Se passar a lista vazia (ou seja, deixar o [] vazio), `useEffect` executará somente no momento que o componente é renderizado pela primeira vez, evitando o loop infinito do callback.
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+petshop-tiago/README.md at 06-manipulando-states · tiagotecinternet/petshop-tiago
