@@ -32,7 +32,7 @@ const ListaPosts = () => {
   return (
     <div className={estilos.lista_posts}>
       {posts.map(({ id, titulo, subtitulo }) => (
-        <Artigo key={id} titulo={titulo} subtitulo={subtitulo}></Artigo>
+        <Artigo key={id} id={id} titulo={titulo} subtitulo={subtitulo}></Artigo>
       ))}
     </div>
   );
