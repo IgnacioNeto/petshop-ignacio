@@ -5,7 +5,7 @@ const Menu = () => {
   return (
     <nav>
       <NavLink exact to="/" activeClassName={estilos.ativo}>
-        Home
+        Blog
       </NavLink>
       <NavLink to="/produtos" activeClassName={estilos.ativo}>
         Produtos
