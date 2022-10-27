@@ -29,8 +29,12 @@
   cursor: pointer;
   transform: scale(1.05);
 }
-a:hover,
+/* a:hover,
 a:focus {
   outline-color: red;
   outline-style: solid;
+} */
+
+.centralizado {
+  text-align: center;
 }

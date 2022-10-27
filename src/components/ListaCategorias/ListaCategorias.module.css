@@ -26,5 +26,9 @@
 
 .lista_categorias a:hover,
 .lista_categorias a:focus {
-  background-color: #2f88a8;
+  background-color: #999;
+}
+
+.lista_categorias a.ativo {
+  background-color: #999;
 }

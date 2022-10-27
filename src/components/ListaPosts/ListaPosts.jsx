@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"; // Hook do react
-import servidorApi from "../../api/servidor-api";
 import estilos from "./ListaPosts.module.css";
 import Artigo from "./Artigo";
 import serverApi from "../../api/servidor-api";
@@ -31,16 +30,25 @@ const ListaPosts = ({ url }) => {
   // abaixo mesmo que true
   if (loading) {
     // return <mark style={{ backgroundColor: "Red" }}>Carregando...</mark>;
-    return <LoadingDesenho />;
+    return <LoadingDesenho ldNome={"Posts..."} />;
   }
 
-  return (
-    <div className={estilos.lista_posts}>
-      {posts.map(({ id, titulo, subtitulo }) => (
-        <Artigo key={id} id={id} titulo={titulo} subtitulo={subtitulo}></Artigo>
-      ))}
-    </div>
-  );
+  if (posts.length > 0) {
+    return (
+      <div className={estilos.lista_posts}>
+        {posts.map(({ id, titulo, subtitulo }) => (
+          <Artigo
+            key={id}
+            id={id}
+            titulo={titulo}
+            subtitulo={subtitulo}
+          ></Artigo>
+        ))}
+      </div>
+    );
+  } else {
+    return <h2 className={estilos.centralizado}>Não há posts...</h2>;
+  }
 };
 
 export default ListaPosts;
