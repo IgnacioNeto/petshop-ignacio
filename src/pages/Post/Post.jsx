@@ -41,7 +41,7 @@ const Post = () => {
   }, [id]); // id é uma dependência para o useEffect
 
   if (loading) {
-    return <LoadingDesenho />;
+    return <LoadingDesenho ldNome={"Carregando conteúdo do post..."} />;
   }
 
   return (
