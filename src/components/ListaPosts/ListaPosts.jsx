@@ -13,7 +13,7 @@ const ListaPosts = ({ url }) => {
     async function getPosts() {
       try {
         // const resposta = await fetch(`${serverApi}/posts`);
-        const resposta = await fetch(`${serverApi}/${url}`);
+        const resposta = await fetch(`${serverApi}/${url || "posts"}`);
         const dados = await resposta.json();
         setPosts(dados);
         setLoading(false);
@@ -22,6 +22,10 @@ const ListaPosts = ({ url }) => {
       }
     }
     getPosts();
+    /* É necessário indicar a url como dependência pois ela muda 
+  toda vez em que uma categoria é clicada */
+    /* Desta forma, o UseEffect "entende" que ele deve executar novamente
+  as suas ações (neste caso, executar novamente o fetch na API) */
   }, [url]);
 
   // abaixo mesmo que true
