@@ -5,7 +5,7 @@ import Artigo from "./Artigo";
 import serverApi from "../../api/servidor-api";
 import LoadingDesenho from "../LoadingDesenho/LoadingDesenho";
 
-const ListaPosts = (props) => {
+const ListaPosts = ({ url }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +13,7 @@ const ListaPosts = (props) => {
     async function getPosts() {
       try {
         // const resposta = await fetch(`${serverApi}/posts`);
-        const resposta = await fetch(`${serverApi}/${props.url}`);
+        const resposta = await fetch(`${serverApi}/${url}`);
         const dados = await resposta.json();
         setPosts(dados);
         setLoading(false);
@@ -22,7 +22,7 @@ const ListaPosts = (props) => {
       }
     }
     getPosts();
-  }, []);
+  }, [url]);
 
   // abaixo mesmo que true
   if (loading) {
