@@ -9,6 +9,7 @@ const ListaPosts = ({ url }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     async function getPosts() {
       try {
         // const resposta = await fetch(`${serverApi}/posts`);
