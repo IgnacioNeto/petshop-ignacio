@@ -39,6 +39,10 @@ const Contato = () => {
     }
   };
 
+  // Lógica para iniciar o botão desabilitado e só habilitar após preencher campos
+  // let desabilitado = nome ==="" || email ==="" || mensagem ==="";
+  let desabilitado = !nome || !email || !mensagem;
+
   return (
     <section>
       <h2 className={estilos.titulo_secao}>Contato</h2>
@@ -87,7 +91,7 @@ const Contato = () => {
           </div>
 
           <div>
-            <Button type="submit" variant="contained">
+            <Button type="submit" variant="contained" disabled={desabilitado}>
               Enviar mensagem
             </Button>
           </div>
