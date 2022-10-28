@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import estilos from "./Contato.module.css";
 import Caixa from "../../components/Caixa/Caixa";
 import { useState } from "react";
+import serverApi from "../../api/servidor-api";
 
 const Contato = () => {
   /* Eventos/Funções para captura da digitação nos campos */
@@ -14,11 +15,39 @@ const Contato = () => {
   const [email, setEmail] = useState("");
   const [mensagem, setMensagem] = useState("");
 
+  const enviarContato = async (event) => {
+    // Evita o comportamento padrão de tentar recarregar a página.
+    event.preventDefault();
+
+    // Para testar
+    // console.log(nome, email, mensagem);
+
+    /* Script para envio dos dados para a API */
+    const opcoes = {
+      method: "POST",
+      body: JSON.stringify({ nome, email, mensagem }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+
+    try {
+      await fetch(`${serverApi}/contatos`, opcoes);
+      alert("Dados enviados!");
+    } catch (error) {
+      console.log("Deu ruim: " + error.message);
+    }
+  };
+
   return (
     <section>
       <h2 className={estilos.titulo_secao}>Contato</h2>
       <Caixa>
-        <form method="post" className={estilos.formulario}>
+        <form
+          onSubmit={enviarContato}
+          method="post"
+          className={estilos.formulario}
+        >
           <div>
             <TextField
               onChange={inputNome}
