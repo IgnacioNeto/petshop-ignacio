@@ -3,6 +3,7 @@ import estilos from "./Contato.module.css";
 import Caixa from "../../components/Caixa/Caixa";
 import { useState } from "react";
 import serverApi from "../../api/servidor-api";
+import { useHistory } from "react-router-dom";
 
 const Contato = () => {
   /* Eventos/Funções para captura da digitação nos campos */
@@ -14,6 +15,10 @@ const Contato = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [mensagem, setMensagem] = useState("");
+
+  /* Hook useHistory (Necessário para navegação/ redirecionamento
+   manualmente, ou seja sem depender dos routes)*/
+  let history = useHistory();
 
   const enviarContato = async (event) => {
     // Evita o comportamento padrão de tentar recarregar a página.
@@ -34,6 +39,7 @@ const Contato = () => {
     try {
       await fetch(`${serverApi}/contatos`, opcoes);
       alert("Dados enviados!");
+      history.push("/"); // Redireciona para a home/blog
     } catch (error) {
       console.log("Deu ruim: " + error.message);
     }
@@ -60,7 +66,8 @@ const Contato = () => {
               variant="outlined"
               fullWidth
               required
-              helperText="Você deve digitar o nome"
+              // Ao iniciar a digitação o texto help (abaixo desaparece)
+              helperText={!nome ? "Você deve digitar o nome" : ""}
             />
           </div>
 
@@ -72,7 +79,7 @@ const Contato = () => {
               variant="outlined"
               fullWidth
               required
-              helperText="Informa um e-mail para contato"
+              helperText={!email ? "Informa um e-mail para contato" : ""}
             />
           </div>
 
@@ -84,7 +91,7 @@ const Contato = () => {
               variant="outlined"
               fullWidth
               required
-              helperText="Fale o que você quiser"
+              helperText={!mensagem ? "Fale o que você quiser" : ""}
               multiline
               rows={6}
             />
