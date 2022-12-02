@@ -13,9 +13,27 @@ const ListaPosts = ({ url }) => {
     async function getPosts() {
       try {
         // const resposta = await fetch(`${serverApi}/posts`);
-        const resposta = await fetch(`${serverApi}/${url || "posts"}`);
+        const resposta = await fetch(`${serverApi}/posts.json`);
         const dados = await resposta.json();
-        setPosts(dados);
+
+        // console.log(dados);
+
+        let listaDePosts = [];
+
+        for (const post in dados) {
+          // console.log(post);
+          const objetoPost = {
+            id: post, // a chave string gerada pelo Firebase será como um id
+            titulo: dados[post].titulo,
+            subtitulo: dados[post].subtitulo,
+            descricao: dados[post].descricao,
+            categoria: dados[post].categoria,
+          };
+          // console.log(objtoPost);
+
+          listaDePosts.push(objetoPost);
+        }
+        setPosts(listaDePosts);
         setLoading(false);
       } catch (error) {
         console.log("Deu ruim!" + error.message);
