@@ -20,15 +20,14 @@ const Post = () => {
   useEffect(() => {
     async function getPost() {
       try {
-        const resposta = await fetch(`${serverApi}/posts/${id}`);
+        /* Ao adicionar o .json após o id os dados do RealTime DataBase
+        são lidos como objeto */
+        const resposta = await fetch(`${serverApi}/posts/${id}.json`);
         const dados = await resposta.json();
         setPost(dados);
         setLoading(false);
-
-        /* Verificando se o resultado do objeto de dados possui tamanho zero
-        (ou seja sem dados nenhum) quando acessamos por exemplo
-        http://localhost:3000/posts/56 (que não existe) */
-        if (Object.keys(dados).length === 0) {
+        /* Se não existir dados (post inesistente) vá para a rota 404  */
+        if (!dados) {
           /* Então forçamos o redirecionamento para uma rota de 1º nível
             e o router traz a pg. 404 */
           history.push("/404");
@@ -38,7 +37,7 @@ const Post = () => {
       }
     }
     getPost();
-  }, [id]); // id é uma dependência para o useEffect
+  }, [id, history]); // id é uma dependência para o useEffect
 
   if (loading) {
     return <LoadingDesenho ldNome={"Carregando conteúdo do post..."} />;
